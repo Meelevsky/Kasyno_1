@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace Kasyno_1
 {
@@ -10,6 +7,12 @@ namespace Kasyno_1
     {
         static void Main(string[] args)
         {
+            var dr = new DataRepository(new WypelnianieStalymi());
+
+            var dr2 = new DataRepository(new WypelnianieStalymiJSON());
+            Console.WriteLine("Hello World!");
+
+            Console.ReadKey();
         }
     }
 }
