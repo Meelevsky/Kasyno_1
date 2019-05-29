@@ -24,6 +24,7 @@ namespace Kasyno_1.Tests
             dr.AddGracz(gracz);
             var expectedGracz = dr.GetGracz(Id);
 
+
             Assert.AreEqual(Id, expectedGracz.Id);
             Assert.AreEqual(Imie, expectedGracz.Imie);
             Assert.AreEqual(Nazwisko, expectedGracz.Nazwisko);
@@ -47,16 +48,16 @@ namespace Kasyno_1.Tests
         [TestMethod()]
         public void AddStanTest()
         {
-            var id = 1;
+            var Id = 1;
             var iloscGier = 10;
             IEnumerable<int> numerStolow = new List<int>();
 
-            var stan = new OpisStanu { Id = id, IloscGier = iloscGier, NumerStolow = numerStolow };
+            var stan = new OpisStanu { Id = Id, IloscGier = iloscGier, NumerStolow = numerStolow };
 
             dr.AddStan(stan);
-            var expectedStan = dr.GetStan(id);
+            var expectedStan = dr.GetStan(Id);
 
-            Assert.AreEqual(expectedStan.Id, id);
+            Assert.AreEqual(expectedStan.Id, Id);
             Assert.AreEqual(expectedStan.IloscGier, iloscGier);
             Assert.AreEqual(expectedStan.NumerStolow, numerStolow);
         }
@@ -84,7 +85,99 @@ namespace Kasyno_1.Tests
             Assert.AreEqual(expectedZdarzenie.Gracz, gracz);
             Assert.AreEqual(expectedZdarzenie.Gra, gra);
             Assert.AreEqual(expectedZdarzenie.NumerStolu, numerStolu);
-            //Console.WriteLine(expectedZdarzenie.Id + expectedZdarzenie.Gracz + expectedZdarzenie.Gra + expectedZdarzenie.NumerStolu);
+
+            //sprawdzamy wyrywkowo, czy na pewno add i get działają
+            Console.WriteLine(Convert.ToString(expectedZdarzenie.Id) + expectedZdarzenie.Gracz.Imie + expectedZdarzenie.Gra.NazwaGry + Convert.ToString(expectedZdarzenie.NumerStolu));
+        }
+
+        [TestMethod()]
+        public void DeleteGraczTest()
+        {
+            var Id = 1;
+            var Imie = "Maciej";
+            var Nazwisko = "Milewski";
+            var PESEL = "90072105756";
+            var gracz = new Gracz { Id = Id, Imie = Imie, Nazwisko = Nazwisko, PESEL = PESEL };
+
+            dr.AddGracz(gracz);
+            dr.DeleteGracz(gracz.Id = Id);
+            var expectedGracz = dr.GetGracz(Id);
+
+            Assert.IsNull(expectedGracz);
+
+        }
+
+        [TestMethod()]
+        public void DeleteKatalogTest()
+        {
+            var nazwaGry = "Rosyjska ruletka";
+            var opisGry = "Polautomatyczny rewolwer przystawiany do glowy - jak nie przezyjesz - przegrywasz";
+            var gra = new Katalog { NazwaGry = nazwaGry, OpisGry = opisGry };
+
+            dr.AddKatalog(gra);
+            dr.DeleteKatalog(gra.NazwaGry = nazwaGry);
+            var expectedKatalog = dr.GetKatalog(nazwaGry);
+            Assert.IsNull(expectedKatalog);
+        }
+
+        [TestMethod()]
+        public void DeleteStanTest()
+        {
+            var Id = 1;
+            var iloscGier = 10;
+            IEnumerable<int> numerStolow = new List<int>();
+
+            var stan = new OpisStanu { Id = Id, IloscGier = iloscGier, NumerStolow = numerStolow };
+
+            dr.AddStan(stan);
+            dr.DeleteStan(stan.Id = Id);
+            var expectedStan = dr.GetStan(Id);
+            Assert.IsNull(expectedStan);
+        }
+
+        [TestMethod()]
+        public void DeleteZdarzenieTest()
+        {
+            var Id = 1;
+            var gracz = new Gracz();
+            gracz.Id = 1;
+            gracz.Imie = "Maciej";
+            gracz.Nazwisko = "Milewski";
+            gracz.PESEL = "90072105756";
+            var gra = new Katalog();
+            gra.NazwaGry = "Rosyjska ruletka";
+            gra.OpisGry = "Traf na kule, bedziesz mial pecha";
+            var numerStolu = 5;
+
+            var zdarzenie = new Zdarzenie { Id = Id, Gracz = gracz, Gra = gra, NumerStolu = numerStolu };
+
+            dr.AddZdarzenie(zdarzenie);
+            dr.DeleteZdarzenie(zdarzenie.Id = Id);
+            var expectedZdarzenie = dr.GetZdarzenie(Id);
+            Assert.IsNull(expectedZdarzenie);
+        }
+
+        [TestMethod()]
+        public void GetAllGraczTest()
+        {
+            var Id1 = 1;
+            var Imie1 = "Maciej";
+            var Nazwisko1 = "Milewski";
+            var PESEL1 = "90072105756";
+            var gracz1 = new Gracz { Id = Id1, Imie = Imie1, Nazwisko = Nazwisko1, PESEL = PESEL1 };
+
+            var Id2 = 2;
+            var Imie2 = "Lukasz";
+            var Nazwisko2 = "Sierminski";
+            var PESEL2 = "90102932148";
+            var gracz2 = new Gracz { Id = Id2, Imie = Imie2, Nazwisko = Nazwisko2, PESEL = PESEL2 };
+
+            dr.AddGracz(gracz1);
+            dr.AddGracz(gracz2);
+
+            var expectedGracze = dr.GetAllGracz();
+
+            Assert.AreEqual()
 
         }
     }

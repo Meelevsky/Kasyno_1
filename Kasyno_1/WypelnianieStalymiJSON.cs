@@ -10,12 +10,13 @@ namespace Kasyno_1
     {
         public Gracz[] PobierzGraczy()
         {
-            return JsonConvert.DeserializeObject<Gracz[]>(File.ReadAllText(@"C:\Users\plmamil2\Source\Repos\Kasyno_1\Kasyno_1\JSON\Gracze.json"));
+            return JsonConvert.DeserializeObject<Gracz[]>(File.ReadAllText(@"C:\Users\milan\source\repos\Meelevsky\Kasyno_1\Kasyno_1\JSON\Gracze.json"));
         }
 
         public Katalog[] PobierzGry()
         {
-            return JsonConvert.DeserializeObject<Katalog[]>(File.ReadAllText(@"C:\Users\plmamil2\Source\Repos\Kasyno_1\Kasyno_1\JSON\Gry.json"));
+            return JsonConvert.DeserializeObject<Katalog[]>(File.ReadAllText(@"C:\Users\milan\source\repos\Meelevsky\Kasyno_1\Kasyno_1\JSON\Gry.json"));
+            
 
         }
 
