@@ -177,7 +177,7 @@ namespace Kasyno_1.Tests
 
             var expectedGracze = dr.GetAllGracz();
 
-            Assert.AreEqual()
+            
 
         }
     }
