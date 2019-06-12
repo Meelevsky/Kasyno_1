@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Kasyno_1
+namespace TPKasyno_1
 {
     public interface IDataService
     {
         IEnumerable<Katalog> WszystkiePozycjeKatalogu();
-        IEnumerable<Zdarzenie> ZdarzeniaDlaElementuWykazu();
-        IEnumerable<Zdarzenie> ZdarzeniaPomiedzyDatami();
-        Zdarzenie DodajZdarzenie();
-        IEnumerable<Katalog> WyswietlKatalog();
+        IEnumerable<Katalog> PrzeszukajlKatalog(string nazwaGry);
+        void DodajZdarzenie(Zdarzenie zdarzenie);
         IEnumerable<Zdarzenie> WyswietlPowiazaneZdarzenia();
+        IEnumerable<Gracz> WyswietlWszystkichGraczy();
+        IEnumerable<Gracz> ZnajdzGracza(string nazwisko);
+        
     }
 }
