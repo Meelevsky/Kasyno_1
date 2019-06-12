@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace TPKasyno_1
+namespace Kasyno_1
 {
     class Program
     {

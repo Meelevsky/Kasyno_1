@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Kasyno_1;
 
-namespace TPKasyno_1
+namespace Kasyno_1
 {
     class DataService : IDataService
     {

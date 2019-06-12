@@ -1,9 +1,8 @@
-﻿using Kasyno_1;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TPKasyno_1
+namespace Kasyno_1
 {
     public interface IDataService
     {
