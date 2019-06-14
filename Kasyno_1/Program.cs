@@ -1,8 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Kasyno_1
 {
+
+    public class KasynoContext : DbContext
+    {
+        public DbSet<Gracz> Gracze { get; set; }
+        public DbSet<Katalog> Gry { get; set; }
+        public DbSet<OpisStanu> OpisyStanow{ get; set; }
+        public DbSet<Zdarzenie> Zdarzenia{ get; set; }
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -10,7 +21,28 @@ namespace Kasyno_1
             var dr = new DataRepository(new WypelnianieStalymi());
             var ds = new DataService(dr);
 
-            var katalog = ds.WszystkiePozycjeKatalogu();
+            using (var db = new KasynoContext())
+            {
+
+                IEnumerable<int> numerStolow = new List<int>();
+
+                var gamer = new Gracz { Id = 1, Imie = "Maciej", Nazwisko = "Milewski", PESEL = "90072105756" };
+                var game = new Katalog { NazwaGry = "Rosyjska ruletka", OpisGry = "Strzelaj! Poki masz szczescie" };
+                var state = new OpisStanu { Id = 3, IloscGier = 2, NumerStolow = numerStolow };
+                var events = new Zdarzenie { Id = 2, Gracz = gamer, Gra = game, NumerStolu = 3 };
+
+                
+
+                db.Gracze.Add(gamer);
+                db.Gry.Add(game);
+                db.OpisyStanow.Add(state);
+                db.Zdarzenia.Add(events);
+                db.SaveChanges();
+
+
+            }
+
+                var katalog = ds.WszystkiePozycjeKatalogu();
             var gra = ds.PrzeszukajlKatalog("Roulette").First();
 
             var gracze = ds.WyswietlWszystkichGraczy();
@@ -24,6 +56,7 @@ namespace Kasyno_1
             ds.DodajZdarzenie(new Zdarzenie() { Gra = gra, Gracz = gracz, NumerStolu = 1, Id = 4 });
 
             ds.WyswietlPowiazaneZdarzenia();
+
 
 
             //var dr2 = new DataRepository(new WypelnianieStalymiJSON());
