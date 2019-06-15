@@ -52,14 +52,14 @@ namespace Kasyno_1.Tests
             var iloscGier = 10;
             IEnumerable<int> numerStolow = new List<int>();
 
-            var stan = new OpisStanu { Id = Id, IloscGier = iloscGier, NumerStolow = numerStolow };
+            var stan = new OpisStanu { Id = Id, IloscGier = iloscGier, Stoly = numerStolow };
 
             dr.AddStan(stan);
             var expectedStan = dr.GetStan(Id);
 
             Assert.AreEqual(expectedStan.Id, Id);
             Assert.AreEqual(expectedStan.IloscGier, iloscGier);
-            Assert.AreEqual(expectedStan.NumerStolow, numerStolow);
+            Assert.AreEqual(expectedStan.Stoly, numerStolow);
         }
 
         [TestMethod()]
@@ -127,7 +127,7 @@ namespace Kasyno_1.Tests
             var iloscGier = 10;
             IEnumerable<int> numerStolow = new List<int>();
 
-            var stan = new OpisStanu { Id = Id, IloscGier = iloscGier, NumerStolow = numerStolow };
+            var stan = new OpisStanu { Id = Id, IloscGier = iloscGier, Stoly = numerStolow };
 
             dr.AddStan(stan);
             dr.DeleteStan(stan.Id = Id);

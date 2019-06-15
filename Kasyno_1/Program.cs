@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 
 namespace Kasyno_1
@@ -10,8 +11,18 @@ namespace Kasyno_1
     {
         public DbSet<Gracz> Gracze { get; set; }
         public DbSet<Katalog> Gry { get; set; }
-        public DbSet<OpisStanu> OpisyStanow{ get; set; }
-        public DbSet<Zdarzenie> Zdarzenia{ get; set; }
+        public DbSet<OpisStanu> OpisyStanow { get; set; }
+        public DbSet<Zdarzenie> Zdarzenia { get; set; }
+        public DbSet<Stol> Stoly { get; set; }
+
+        public KasynoContext() : base("name=Kasyno")
+        {
+
+        }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
     }
 
     class Program
@@ -24,11 +35,11 @@ namespace Kasyno_1
             using (var db = new KasynoContext())
             {
 
-                IEnumerable<int> numerStolow = new List<int>();
+                ICollection<Stol> numerStolow = new List<Stol>();
 
                 var gamer = new Gracz { Id = 1, Imie = "Maciej", Nazwisko = "Milewski", PESEL = "90072105756" };
                 var game = new Katalog { NazwaGry = "Rosyjska ruletka", OpisGry = "Strzelaj! Poki masz szczescie" };
-                var state = new OpisStanu { Id = 3, IloscGier = 2, NumerStolow = numerStolow };
+                var state = new OpisStanu { Id = 3, IloscGier = 2, Stoly = numerStolow };
                 var events = new Zdarzenie { Id = 2, Gracz = gamer, Gra = game, NumerStolu = 3 };
 
                 

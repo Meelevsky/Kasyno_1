@@ -8,6 +8,6 @@ namespace Kasyno_1
     {
         public int Id { get; set; }
         public int IloscGier { get; set; }
-        public IEnumerable<int> NumerStolow { get; set; }
+        public virtual ICollection<Stol> Stoly { get; set; }
     }
 }
